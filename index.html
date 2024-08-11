@@ -3,118 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日本旅館業常用日語檢定測驗</title>
+    <title>日本旅館業常用日語檢定測驗 - 和心旅職人塾</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #B22222;
+            --dark-gray: #333333;
+            --light-gray: #F5F5F5;
+            --background-color: #FAF0E6;
+        }
+
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: var(--background-color);
+            color: var(--dark-gray);
             line-height: 1.6;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
         }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            height: 50px;
+        }
+
+        nav a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
         h1, h2, h3 {
-            color: #4a4a4a;
+            color: var(--primary-color);
             text-align: center;
         }
+
+        .content-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
         .question, .userInfo {
             margin-bottom: 20px;
-            background-color: #f9f9f9;
+            background-color: var(--light-gray);
             padding: 15px;
             border-radius: 5px;
         }
+
         select, input {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-family: 'Noto Sans JP', sans-serif;
         }
+
         button {
             display: block;
             width: 200px;
             margin: 20px auto;
             padding: 10px;
-            background-color: #4CAF50;
+            background-color: var(--primary-color);
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: background-color 0.3s ease;
         }
+
         button:hover {
-            background-color: #45a049;
+            background-color: #8B0000;
         }
+
         button:disabled {
-            background-color: #cccccc;
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
             cursor: not-allowed;
         }
+
         #result {
             text-align: center;
             font-weight: bold;
             margin-top: 20px;
         }
+
         #certificate {
             text-align: center;
             margin-top: 30px;
             padding: 20px;
-            border: 2px solid #4CAF50;
+            border: 2px solid var(--primary-color);
             border-radius: 10px;
             display: none;
+            background-color: white;
         }
+
         #currentLevel {
             text-align: center;
             font-size: 1.2em;
             font-weight: bold;
-            color: #4CAF50;
+            color: var(--primary-color);
             margin-bottom: 20px;
         }
+
         .correct {
-            color: green;
+            color: #4CAF50;
         }
+
         .incorrect {
-            color: red;
+            color: var(--primary-color);
         }
+
         #levelInfo {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
-            color: #4a4a4a;
+            color: var(--dark-gray);
         }
+
         #promotionInfo {
             text-align: center;
             margin-top: 20px;
             padding: 15px;
-            background-color: #f0f8ff;
-            border: 1px solid #b0e0e6;
+            background-color: var(--light-gray);
+            border: 1px solid var(--primary-color);
             border-radius: 5px;
         }
+
         #promotionInfo a, #onlineTestButton {
-            color: #4169e1;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
         }
+
         #promotionInfo a:hover, #onlineTestButton:hover {
             text-decoration: underline;
         }
+
         #onlineTestButton {
-            background-color: #4169e1;
+            background-color: var(--primary-color);
             color: white;
             margin-top: 20px;
+        }
+
+        .explanation {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--dark-gray);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .decoration {
+            position: absolute;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .decoration.top-left {
+            top: 0;
+            left: 0;
+        }
+
+        .decoration.bottom-right {
+            bottom: 0;
+            right: 0;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav {
+                margin-top: 10px;
+            }
+
+            nav a {
+                margin: 0 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <img src="path_to_your_logo.png" alt="和心旅職人塾 Logo" class="logo">
+            <nav>
+                <a href="#">首頁</a>
+                <a href="#">關於我們</a>
+                <a href="#">聯絡我們</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
+        <img src="path_to_sakura_decoration.png" alt="Sakura Decoration" class="decoration top-left">
+        <img src="path_to_wave_decoration.png" alt="Wave Decoration" class="decoration bottom-right">
+
         <h1>日本旅館業常用日語檢定測驗</h1>
-        <div id="userInfoForm">
+
+        <div id="userInfoForm" class="content-box">
             <h2>請填寫個人資料</h2>
             <div class="userInfo">
                 <input type="text" id="chineseName" placeholder="中文姓名" required>
@@ -123,7 +264,8 @@
             </div>
             <button onclick="submitUserInfo()">提交資料</button>
         </div>
-        <div id="levelSelect" style="display:none;">
+
+        <div id="levelSelect" class="content-box" style="display:none;">
             <h2>請選擇測驗等級</h2>
             <div id="levelInfo"></div>
             <button onclick="startTest('初級')">初級測驗</button>
@@ -131,19 +273,34 @@
             <button onclick="startTest('高級')" id="highLevelButton" disabled>高級測驗</button>
             <button id="onlineTestButton" style="display:none;" onclick="goToOnlineTest()">參加日本旅館宿泊業人才線上檢定</button>
         </div>
+
         <div id="currentLevel" style="display:none;"></div>
-        <div id="quiz" style="display:none;"></div>
+
+        <div id="quiz" class="content-box" style="display:none;"></div>
+
         <button id="submitButton" style="display:none;" onclick="submitAnswers()">提交答案</button>
-        <div id="result"></div>
-        <div id="answerReview" style="display:none;"></div>
-        <div id="certificate"></div>
-        <div id="promotionInfo" style="display:none;"></div>
+
+        <div id="result" class="content-box" style="display:none;"></div>
+
+        <div id="answerReview" class="content-box" style="display:none;"></div>
+
+        <div id="certificate" class="content-box"></div>
+
+        <div id="promotionInfo" class="content-box" style="display:none;"></div>
+
         <button id="retryButton" style="display:none;" onclick="retryTest()">重新測驗</button>
         <button id="nextLevelButton" style="display:none;" onclick="goToNextLevel()">進入下一級測驗</button>
         <button id="backToLevelSelect" style="display:none;" onclick="backToLevelSelect()">返回選擇等級</button>
     </div>
 
+    <footer>
+        <p>&copy; 2024 和心旅職人塾. 版權所有.</p>
+        <p><a href="#">隱私政策</a> | <a href="#">使用條款</a></p>
+    </footer>
+
     <script>
+        // JavaScript 代碼保持不變
+        // 以下是之前提供的 JavaScript 代碼
         let currentLevel = '';
         let questions = [];
         let userAnswers = [];
@@ -198,11 +355,26 @@
 
         function loadQuestions(level) {
             // 這裡應該是從後端 API 獲取問題的地方
-            // 現在我們使用一個簡單的示例
+            // 現在我們使用一個簡單的示例，增加了解析
             questions = [
-                { word: "お客様", options: ["客人", "員工", "經理", "廚師"], correct: "客人" },
-                { word: "チェックイン", options: ["入住", "退房", "預訂", "取消"], correct: "入住" },
-                { word: "フロント", options: ["前台", "房間", "餐廳", "浴場"], correct: "前台" },
+                { 
+                    word: "お客様", 
+                    options: ["客人", "員工", "經理", "廚師"], 
+                    correct: "客人",
+                    explanation: "「お客様」是對客人的尊稱，在旅館業中常用來稱呼住宿的客人。"
+                },
+                { 
+                    word: "チェックイン", 
+                    options: ["入住", "退房", "預訂", "取消"], 
+                    correct: "入住",
+                    explanation: "「チェックイン」是英語「Check-in」的日語音譯，在旅館業中表示客人辦理入住手續。"
+                },
+                { 
+                    word: "フロント", 
+                    options: ["前台", "房間", "餐廳", "浴場"], 
+                    correct: "前台",
+                    explanation: "「フロント」來自英語「Front」，在旅館中指接待處或前台，是客人辦理各種手續的地方。"
+                },
                 // ... 更多問題
             ];
             userAnswers = new Array(questions.length).fill(null);
@@ -250,6 +422,9 @@
                         <p>問題 ${index + 1}: ${question.word}</p>
                         <p>您的答案: ${userAnswers[index]}</p>
                         <p>正確答案: ${question.correct}</p>
+                        <div class="explanation">
+                            <strong>詳細解析：</strong> ${question.explanation}
+                        </div>
                     </div>
                 `;
             });
@@ -268,6 +443,7 @@
                 <p>正確題數: ${correctCount}</p>
                 <p>${passed ? '恭喜您通過了測驗！' : '很遺憾，您沒有通過測驗。'}</p>
             `;
+            document.getElementById('result').style.display = 'block';
 
             document.getElementById('answerReview').innerHTML = reviewHTML;
             document.getElementById('answerReview').style.display = 'block';
@@ -326,6 +502,7 @@
             document.getElementById('retryButton').style.display = 'none';
             document.getElementById('backToLevelSelect').style.display = 'none';
             document.getElementById('result').innerHTML = '';
+            document.getElementById('result').style.display = 'none';
             document.getElementById('answerReview').innerHTML = '';
             document.getElementById('answerReview').style.display = 'none';
             startTest(currentLevel);
@@ -340,6 +517,7 @@
                 document.getElementById('backToLevelSelect').style.display = 'none';
                 document.getElementById('certificate').style.display = 'none';
                 document.getElementById('result').innerHTML = '';
+                document.getElementById('result').style.display = 'none';
                 document.getElementById('answerReview').innerHTML = '';
                 document.getElementById('answerReview').style.display = 'none';
             }
@@ -355,6 +533,7 @@
 
         function backToLevelSelect() {
             document.getElementById('result').innerHTML = '';
+            document.getElementById('result').style.display = 'none';
             document.getElementById('answerReview').innerHTML = '';
             document.getElementById('answerReview').style.display = 'none';
             document.getElementById('certificate').style.display = 'none';
