@@ -1,173 +1,375 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>日語酒店用語測驗</title>
+    <title>日本旅館業常用日語檢定測驗</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
             line-height: 1.6;
-            margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        h1 {
+        h1, h2, h3 {
+            color: #4a4a4a;
             text-align: center;
-            color: #333;
         }
-        .question {
+        .question, .userInfo {
             margin-bottom: 20px;
-        }
-        .options {
-            display: flex;
-            flex-direction: column;
-        }
-        .option {
-            margin: 5px 0;
-            padding: 10px;
-            background-color: #e9e9e9;
-            border: none;
+            background-color: #f9f9f9;
+            padding: 15px;
             border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
         }
-        .option:hover {
-            background-color: #d4d4d4;
-        }
-        .selected {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .result {
-            text-align: center;
-            font-size: 1.2em;
-            margin-top: 20px;
-        }
-        .hidden {
-            display: none;
-        }
-        #submit, #retry {
-            display: block;
+        select, input {
             width: 100%;
             padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
             background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
-            font-size: 1em;
             cursor: pointer;
-            transition: background-color 0.3s;
+            font-size: 16px;
         }
-        #submit:hover, #retry:hover {
+        button:hover {
             background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #result {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #certificate {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            display: none;
+        }
+        #currentLevel {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        #levelInfo {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #4a4a4a;
+        }
+        #promotionInfo {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border: 1px solid #b0e0e6;
+            border-radius: 5px;
+        }
+        #promotionInfo a, #onlineTestButton {
+            color: #4169e1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        #promotionInfo a:hover, #onlineTestButton:hover {
+            text-decoration: underline;
+        }
+        #onlineTestButton {
+            background-color: #4169e1;
+            color: white;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>日語酒店用語測驗</h1>
-        <div id="quiz">
-            <div class="question">
-                <p>1. 「いらっしゃいませ」的中文意思是什麼？</p>
-                <div class="options">
-                    <button class="option">A. 歡迎光臨</button>
-                    <button class="option">B. 謝謝</button>
-                    <button class="option">C. 再見</button>
-                    <button class="option">D. 對不起</button>
-                </div>
+        <h1>日本旅館業常用日語檢定測驗</h1>
+        <div id="userInfoForm">
+            <h2>請填寫個人資料</h2>
+            <div class="userInfo">
+                <input type="text" id="chineseName" placeholder="中文姓名" required>
+                <input type="text" id="englishName" placeholder="英文名" required>
+                <input type="email" id="email" placeholder="Email" required>
             </div>
-            <div class="question">
-                <p>2. 「お部屋」的中文意思是什麼？</p>
-                <div class="options">
-                    <button class="option">A. 餐廳</button>
-                    <button class="option">B. 浴室</button>
-                    <button class="option">C. 房間</button>
-                    <button class="option">D. 大廳</button>
-                </div>
-            </div>
-            <div class="question">
-                <p>3. 「チェックイン」的中文意思是什麼？</p>
-                <div class="options">
-                    <button class="option">A. 退房</button>
-                    <button class="option">B. 入住</button>
-                    <button class="option">C. 預訂</button>
-                    <button class="option">D. 付款</button>
-                </div>
-            </div>
-            <div class="question">
-                <p>4. 「お風呂」的中文意思是什麼？</p>
-                <div class="options">
-                    <button class="option">A. 浴室</button>
-                    <button class="option">B. 廁所</button>
-                    <button class="option">C. 廚房</button>
-                    <button class="option">D. 客廳</button>
-                </div>
-            </div>
-            <div class="question">
-                <p>5. 「鍵」的中文意思是什麼？</p>
-                <div class="options">
-                    <button class="option">A. 電梯</button>
-                    <button class="option">B. 行李</button>
-                    <button class="option">C. 鑰匙</button>
-                    <button class="option">D. 電話</button>
-                </div>
-            </div>
-            <button id="submit">提交答案</button>
+            <button onclick="submitUserInfo()">提交資料</button>
         </div>
-        <div id="result" class="hidden">
-            <p>您的得分是：<span id="score"></span> / 5</p>
-            <button id="retry">重新測驗</button>
+        <div id="levelSelect" style="display:none;">
+            <h2>請選擇測驗等級</h2>
+            <div id="levelInfo"></div>
+            <button onclick="startTest('初級')">初級測驗</button>
+            <button onclick="startTest('中級')" id="middleLevelButton" disabled>中級測驗</button>
+            <button onclick="startTest('高級')" id="highLevelButton" disabled>高級測驗</button>
+            <button id="onlineTestButton" style="display:none;" onclick="goToOnlineTest()">參加日本旅館宿泊業人才線上檢定</button>
         </div>
+        <div id="currentLevel" style="display:none;"></div>
+        <div id="quiz" style="display:none;"></div>
+        <button id="submitButton" style="display:none;" onclick="submitAnswers()">提交答案</button>
+        <div id="result"></div>
+        <div id="answerReview" style="display:none;"></div>
+        <div id="certificate"></div>
+        <div id="promotionInfo" style="display:none;"></div>
+        <button id="retryButton" style="display:none;" onclick="retryTest()">重新測驗</button>
+        <button id="nextLevelButton" style="display:none;" onclick="goToNextLevel()">進入下一級測驗</button>
+        <button id="backToLevelSelect" style="display:none;" onclick="backToLevelSelect()">返回選擇等級</button>
     </div>
+
     <script>
-        const questions = document.querySelectorAll('.question');
-        const options = document.querySelectorAll('.option');
-        const submitBtn = document.getElementById('submit');
-        const retryBtn = document.getElementById('retry');
-        const quizDiv = document.getElementById('quiz');
-        const resultDiv = document.getElementById('result');
-        const scoreSpan = document.getElementById('score');
+        let currentLevel = '';
+        let questions = [];
+        let userAnswers = [];
+        let userInfo = {};
+        let passedLevels = {
+            '初級': false,
+            '中級': false,
+            '高級': false
+        };
 
-        const correctAnswers = ['A', 'C', 'B', 'A', 'C'];
+        function submitUserInfo() {
+            userInfo.chineseName = document.getElementById('chineseName').value;
+            userInfo.englishName = document.getElementById('englishName').value;
+            userInfo.email = document.getElementById('email').value;
 
-        options.forEach(option => {
-            option.addEventListener('click', () => {
-                const parent = option.parentElement;
-                parent.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-                option.classList.add('selected');
-            });
-        });
+            if (userInfo.chineseName && userInfo.englishName && userInfo.email) {
+                document.getElementById('userInfoForm').style.display = 'none';
+                showLevelSelect();
+            } else {
+                alert('請填寫所有必要資訊。');
+            }
+        }
 
-        submitBtn.addEventListener('click', () => {
-            let score = 0;
+        function showLevelSelect() {
+            document.getElementById('levelSelect').style.display = 'block';
+            updateAvailableLevels();
+            updateLevelInfo();
+        }
+
+        function updateLevelInfo() {
+            let infoText = "您目前可以參加的測驗等級：";
+            if (!passedLevels['初級']) {
+                infoText += "初級";
+            } else if (!passedLevels['中級']) {
+                infoText += "中級";
+            } else if (!passedLevels['高級']) {
+                infoText += "高級";
+            } else {
+                infoText += "您已通過所有等級測驗！";
+                document.getElementById('onlineTestButton').style.display = 'block';
+            }
+            document.getElementById('levelInfo').textContent = infoText;
+        }
+
+        function startTest(level) {
+            currentLevel = level;
+            document.getElementById('levelSelect').style.display = 'none';
+            document.getElementById('currentLevel').textContent = `當前測驗等級：${level}`;
+            document.getElementById('currentLevel').style.display = 'block';
+            loadQuestions(level);
+        }
+
+        function loadQuestions(level) {
+            // 這裡應該是從後端 API 獲取問題的地方
+            // 現在我們使用一個簡單的示例
+            questions = [
+                { word: "お客様", options: ["客人", "員工", "經理", "廚師"], correct: "客人" },
+                { word: "チェックイン", options: ["入住", "退房", "預訂", "取消"], correct: "入住" },
+                { word: "フロント", options: ["前台", "房間", "餐廳", "浴場"], correct: "前台" },
+                // ... 更多問題
+            ];
+            userAnswers = new Array(questions.length).fill(null);
+            showQuestions();
+        }
+
+        function showQuestions() {
+            let quizHTML = '';
             questions.forEach((question, index) => {
-                const selectedOption = question.querySelector('.selected');
-                if (selectedOption) {
-                    const userAnswer = Array.from(question.querySelectorAll('.option')).indexOf(selectedOption);
-                    if (String.fromCharCode(65 + userAnswer) === correctAnswers[index]) {
-                        score++;
-                    }
-                }
+                quizHTML += `
+                    <div class="question">
+                        <h3>問題 ${index + 1}</h3>
+                        <p>請選擇 "${question.word}" 的正確中文翻譯：</p>
+                        <select id="answer${index}" onchange="updateAnswer(${index}, this.value)">
+                            <option value="">請選擇</option>
+                            ${question.options.map(option => `<option value="${option}">${option}</option>`).join('')}
+                        </select>
+                    </div>
+                `;
             });
-            scoreSpan.textContent = score;
-            quizDiv.classList.add('hidden');
-            resultDiv.classList.remove('hidden');
-        });
+            document.getElementById('quiz').innerHTML = quizHTML;
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('submitButton').style.display = 'block';
+        }
 
-        retryBtn.addEventListener('click', () => {
-            options.forEach(option => option.classList.remove('selected'));
-            quizDiv.classList.remove('hidden');
-            resultDiv.classList.add('hidden');
-        });
+        function updateAnswer(index, value) {
+            userAnswers[index] = value;
+        }
+
+        function submitAnswers() {
+            if (userAnswers.some(answer => answer === null)) {
+                alert('請回答所有問題。');
+                return;
+            }
+
+            let correctCount = 0;
+            let reviewHTML = '<h2>答案回顧</h2>';
+
+            questions.forEach((question, index) => {
+                const isCorrect = userAnswers[index] === question.correct;
+                if (isCorrect) correctCount++;
+
+                reviewHTML += `
+                    <div class="${isCorrect ? 'correct' : 'incorrect'}">
+                        <p>問題 ${index + 1}: ${question.word}</p>
+                        <p>您的答案: ${userAnswers[index]}</p>
+                        <p>正確答案: ${question.correct}</p>
+                    </div>
+                `;
+            });
+
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('submitButton').style.display = 'none';
+            document.getElementById('currentLevel').style.display = 'none';
+
+            const passScore = questions.length;
+            const passed = correctCount === passScore;
+
+            document.getElementById('result').innerHTML = `
+                <h2>測驗結果</h2>
+                <p>測驗等級: ${currentLevel}</p>
+                <p>總題數: ${questions.length}</p>
+                <p>正確題數: ${correctCount}</p>
+                <p>${passed ? '恭喜您通過了測驗！' : '很遺憾，您沒有通過測驗。'}</p>
+            `;
+
+            document.getElementById('answerReview').innerHTML = reviewHTML;
+            document.getElementById('answerReview').style.display = 'block';
+
+            if (passed) {
+                passedLevels[currentLevel] = true;
+                showCertificate();
+                if (currentLevel !== '高級') {
+                    document.getElementById('nextLevelButton').style.display = 'block';
+                }
+                updateAvailableLevels();
+            } else {
+                document.getElementById('retryButton').style.display = 'block';
+            }
+            document.getElementById('backToLevelSelect').style.display = 'block';
+
+            if (passedLevels['初級'] && passedLevels['中級'] && passedLevels['高級']) {
+                showPromotionInfo();
+            }
+
+            // 發送結果到用戶的Email
+            sendResultEmail();
+        }
+
+        function showCertificate() {
+            const certificateDiv = document.getElementById('certificate');
+            certificateDiv.style.display = 'block';
+            certificateDiv.innerHTML = `
+                <h2>日本旅館業常用日語能力認證</h2>
+                <p>茲證明 ${userInfo.chineseName} (${userInfo.englishName}) 已成功通過</p>
+                <p>${currentLevel}測驗</p>
+                <p>發證日期：${new Date().toLocaleDateString()}</p>
+                <p>證書核發單位：和心旅職人塾</p>
+            `;
+        }
+
+        function showPromotionInfo() {
+            const promotionDiv = document.getElementById('promotionInfo');
+            promotionDiv.style.display = 'block';
+            promotionDiv.innerHTML = `
+                <h3>恭喜您完成所有測驗！</h3>
+                <p>您現在有資格參加【日本旅館宿泊業人才線上檢定】</p>
+                <p>原價 3,000元，特別優惠價 2,500元</p>
+                <p>您的能力等同於【CAIPT 宿泊業特定技能檢定】</p>
+                <p>詳情請訪問：<a href="https://washinnmd.jp/" target="_blank">和心旅職人塾官網</a></p>
+            `;
+        }
+
+        function sendResultEmail() {
+            // 這裡應該是發送Email的邏輯
+            // 由於這是前端代碼，實際的Email發送應該在後端完成
+            console.log(`發送結果到 ${userInfo.email}`);
+        }
+
+        function retryTest() {
+            document.getElementById('retryButton').style.display = 'none';
+            document.getElementById('backToLevelSelect').style.display = 'none';
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('answerReview').innerHTML = '';
+            document.getElementById('answerReview').style.display = 'none';
+            startTest(currentLevel);
+        }
+
+        function goToNextLevel() {
+            const levels = ['初級', '中級', '高級'];
+            const currentIndex = levels.indexOf(currentLevel);
+            if (currentIndex < levels.length - 1) {
+                startTest(levels[currentIndex + 1]);
+                document.getElementById('nextLevelButton').style.display = 'none';
+                document.getElementById('backToLevelSelect').style.display = 'none';
+                document.getElementById('certificate').style.display = 'none';
+                document.getElementById('result').innerHTML = '';
+                document.getElementById('answerReview').innerHTML = '';
+                document.getElementById('answerReview').style.display = 'none';
+            }
+        }
+
+        function updateAvailableLevels() {
+            document.getElementById('middleLevelButton').disabled = !passedLevels['初級'];
+            document.getElementById('highLevelButton').disabled = !passedLevels['中級'];
+            if (passedLevels['初級'] && passedLevels['中級'] && passedLevels['高級']) {
+                document.getElementById('onlineTestButton').style.display = 'block';
+            }
+        }
+
+        function backToLevelSelect() {
+            document.getElementById('result').innerHTML = '';
+            document.getElementById('answerReview').innerHTML = '';
+            document.getElementById('answerReview').style.display = 'none';
+            document.getElementById('certificate').style.display = 'none';
+            document.getElementById('retryButton').style.display = 'none';
+            document.getElementById('nextLevelButton').style.display = 'none';
+            document.getElementById('backToLevelSelect').style.display = 'none';
+            document.getElementById('promotionInfo').style.display = 'none';
+            showLevelSelect();
+        }
+
+        function goToOnlineTest() {
+            // 這裡放置跳轉到線上檢定的邏輯
+            // 目前使用佔位符URL
+            window.location.href = "https://example.com/online-test";
+        }
     </script>
 </body>
 </html>
